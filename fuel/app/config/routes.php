@@ -19,6 +19,8 @@ return array(
 	 */
 
 	'_root_' => 'welcome/index',
+	'skills' => 'skills/index',
+	'skills/(:num)' => 'skills/view/$1',
 
 	/**
 	 * -------------------------------------------------------------------------

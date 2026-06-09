@@ -20,11 +20,15 @@
  */
 
 return array(
-	'default' => array(
-		'connection' => array(
-			'dsn'      => 'mysql:host=localhost;dbname=fuel_dev',
-			'username' => 'root',
-			'password' => 'root',
+    'default' => array(
+        'type' => 'pdo',
+        'connection' => array(
+            'dsn' => 'sqlite:' . APPPATH . 'tmp/app.sqlite',
+            'username' => null,
+            'password' => null,
+            'persistent' => false,
 		),
-	),
+		'charset' => null,
+        'profiling' => true,
+    ),
 );
