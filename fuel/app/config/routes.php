@@ -22,6 +22,8 @@ return array(
 	'skills' => 'skills/index',
 	'skills/(:num)' => 'skills/view/$1',
 	'products' => 'products/index',
+	'products/(:num)' => 'products/view/$1',
+	'products/create' => 'products/create',
 
 	/**
 	 * -------------------------------------------------------------------------
