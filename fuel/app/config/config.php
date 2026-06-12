@@ -1,4 +1,5 @@
 <?php
+use Fuel\Core\Fuel;
 /**
  * Fuel is a fast, lightweight, community driven PHP 5.4+ framework.
  *
@@ -198,7 +199,7 @@ return array(
 	 *
 	 */
 
-	// 'log_threshold'   => Fuel::L_WARNING,
+	'log_threshold'   => Fuel::L_DEBUG,
 	// 'log_path'        => APPPATH.'logs/',
 	// 'log_date_format' => 'Y-m-d H:i:s',
 

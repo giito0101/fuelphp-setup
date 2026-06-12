@@ -3,7 +3,8 @@
 use Fuel\Core\Response;
 use Fuel\Core\Format;
 use Fuel\Core\Controller;
-use Fuel\Core\Input;
+use Fuel\Core\Validation;
+use Fuel\Core\Log;
 
 class Controller_Products extends Controller
 {
@@ -53,6 +54,30 @@ class Controller_Products extends Controller
     public function action_create()
     {
         $data = json_decode(file_get_contents('php://input'), true);
+
+        $val = Validation::forge();
+
+        $val->add('name', '商品名')
+            ->add_rule('required')
+            ->add_rule('max_length', 250);
+
+        $val->add('price', '価格')
+            ->add_rule('required')
+            ->add_rule('valid_string', ['numeric'])
+            ->add_rule('numeric_min', 1);
+
+        $val->add('stock', '在庫数')
+            ->add_rule('required')
+            ->add_rule('valid_string', ['numeric'])
+            ->add_rule('numeric_min', 0);
+
+        if (!$val->run($data)) {
+            return $this->json_response(array('errors' => [
+                'name' => $val->error('name') ? $val->error('name')->get_message() : null,
+                'price' => $val->error('price') ? $val->error('price')->get_message() : null,
+                'stock' => $val->error('stock') ? $val->error('stock')->get_message() : null,
+            ]), 422);
+        }
 
         $newProduct = [
             'id' => count($this->products) + 1,
