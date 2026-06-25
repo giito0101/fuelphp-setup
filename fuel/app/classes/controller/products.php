@@ -55,11 +55,15 @@ class Controller_Products extends Controller
             ->add_rule('valid_string', ['numeric'])
             ->add_rule('numeric_min', 0);
 
+        $val->add('description', '商品説明')
+            ->add_rule('max_length', 500);  
+
         if (!$val->run($data)) {
             return $this->json_response(array('errors' => [
                 'name' => $val->error('name') ? $val->error('name')->get_message() : null,
                 'price' => $val->error('price') ? $val->error('price')->get_message() : null,
                 'stock' => $val->error('stock') ? $val->error('stock')->get_message() : null,
+                'description' => $val->error('description') ? $val->error('description')->get_message() : null,
             ]), 422);
         }
 
@@ -67,6 +71,7 @@ class Controller_Products extends Controller
             'name' => $data['name'],
             'price' => (int) $data['price'],
             'stock' => (int) $data['stock'],
+            'description' => $data['description'],
         ];
 
         $product = Model_Product::forge($newProduct);
