@@ -21,6 +21,7 @@ return array(
 	'_root_' => 'welcome/index',
 	'products' => 'products/index',
 	'products/(:num)' => 'products/view/$1',
+	'products/update/(:num)' => 'products/update/$1',
 	'products/create' => 'products/create',
 
 	/**
